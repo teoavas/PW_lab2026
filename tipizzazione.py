@@ -6,6 +6,7 @@ def compute_sum(
 ) -> float:
     return x + y + z
 
-a: list[int] | (str, int)
+a: list[int] 
+
 
 
