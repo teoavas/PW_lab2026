@@ -1,7 +1,26 @@
 from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
+
 app = FastAPI()
 
-@app.get("/{username}")
+@app.get("/", response_class=HTMLResponse)
+def home():
+    html = """
+    <!DOCTYPE html>
+    <html>
+        <body>
+            <h1>Hello world!</h1>
+            <p>Hellooo!</p>
+        </body>
+    </html>
+    """
+    return html
+
+
+
+
+
+'''@app.get("/{username}")
 def username_webpage(
     username: str
 ):
@@ -13,7 +32,7 @@ def order_webpage(
     username: str,
     order_id: int
 ):
-    return f"Hello {username}! Your order id is {order_id}."
+    return f"Hello {username}! Your order id is {order_id}."'''
 
 
 
