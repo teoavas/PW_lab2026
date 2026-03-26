@@ -1,0 +1,90 @@
+/* --- PALETTE ISPIRATA AL TRAMONTO --- */
+:root {
+    --bg: #f2f7ff;
+    --primary: #1a3d7c;
+    --accent: #ffb36b;
+    --text: #333;
+    --nav-bg: #ffffffcc;
+    --footer-bg: #1a3d7c;
+    --footer-text: #f2f7ff;
+}
+
+/* --- RESET LEGGERO --- */
+body, h1, h2, p, nav, footer {
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* --- SFONDO E TESTO --- */
+body {
+    background: linear-gradient(to bottom, var(--bg), #dbe9ff);
+    color: var(--text);
+}
+
+/* --- HEADER --- */
+header {
+    text-align: center;
+    padding: 25px 0;
+}
+
+header h1 {
+    color: var(--primary);
+    font-size: 2.2rem;
+    margin-bottom: 5px;
+}
+
+header p {
+    color: #555;
+}
+
+/* --- NAVBAR --- */
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    background: var(--nav-bg);
+    backdrop-filter: blur(6px);
+    padding: 12px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+nav a:hover {
+    color: var(--accent);
+}
+
+/* --- CONTENUTO --- */
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* --- IMMAGINE DEL TRAMONTO --- */
+img {
+    max-width: 80%;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px #0003;
+    transition: 0.3s;
+}
+
+img:hover {
+    transform: scale(1.02);
+}
+
+/* --- FOOTER --- */
+footer {
+    background: var(--footer-bg);
+    color: var(--footer-text);
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 40px;
+    font-size: 0.9rem;
+}

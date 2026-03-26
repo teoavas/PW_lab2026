@@ -1,23 +1,39 @@
-from fastapi import FastAPI
+
+from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 
+# Montiamo la cartella static
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+templates = Jinja2Templates(directory="templates")
+
+
 @app.get("/", response_class=HTMLResponse)
-def home():
-    html = """
-    <!DOCTYPE html>
-    <html>
-        <body>
-            <h1>Hello world!</h1>
-            <p>Hellooo!</p>
-        </body>
-    </html>
-    """
-    return html
+def home(request: Request):
+    return templates.TemplateResponse(
+        name="home.html",
+        request=request,
+        context={"text": "Welcome to the store"}
+    )
 
+@app.get("/products", response_class=HTMLResponse)
+def products(request: Request):
 
+    products = [
+        {"name": "Laptop", "price": 1000, "image": "laptop.jpg"},
+        {"name": "Mouse", "price": 25, "image": "mouse.jpg"},
+        {"name": "Keyboard", "price": 45, "image": "keyboard.jpg"}
+    ]
 
+    return templates.TemplateResponse(
+        name="products.html",
+        request=request,
+        context={"products": products}
+    )
 
 
 '''@app.get("/{username}")

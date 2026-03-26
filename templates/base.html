@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Un sito web</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>Un sito web</h1>
+        <p>Un esempio di un sito web.</p>
+    </header>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="#">Qualcosa</a>
+        <a href="#">Qualcos'altro</a>
+        <a href="/products">Prodotti</a>
+    </nav>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Programmazione Web UNICA</p>
+    </footer>
+
+</body>
+</html>

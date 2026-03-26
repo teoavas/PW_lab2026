@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Lista prodotti</h2>
+
+<table border="1" cellpadding="5">
+    <tr>
+        <th>Nome</th>
+        <th>Prezzo</th>
+        <th>Immagine</th>
+    </tr>
+
+    {% for product in products %}
+    <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price }} €</td>
+        <td>
+            <img src="{{ url_for('static', path=product.image) }}" 
+                 alt="{{ product.name }}" 
+                 width="120">
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
