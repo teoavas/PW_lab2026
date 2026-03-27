@@ -1,8 +1,20 @@
-
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
+from typing import Annotated
+from pydantic import Field, BaseModel
+
+
+class Product(BaseModel):
+    name: Annotated[str, Field(min_length=3, max_length=30)]
+    price: Annotated[float, Field(gt=0)]
+    location: Annotated[str, Field(min_length=2)]
+
+#product=Product(name="Notebook DELL", price=2000, location="Cagliari")
+product = Product.model_validate(
+    {"name":"Notebook DELL", "price":2000, "location":"Cagliari"}
+)
 
 app = FastAPI()
 
@@ -25,10 +37,10 @@ def home(request: Request):
 def products(request: Request):
 
     products = [
-        {"name": "Laptop", "price": 1000, "image": "laptop.jpg"},
-        {"name": "Mouse", "price": 25, "image": "mouse.jpg"},
-        {"name": "Keyboard", "price": 45, "image": "keyboard.jpg"}
-    ]
+        {"name": "Laptop", "price": 1000, "location": "A1"},
+        {"name": "Mouse", "price": 25, "location": "B2"},
+        {"name": "Keyboard", "price": 45, "location": "C3"}
+    ] + product_list
 
     return templates.TemplateResponse(
         name="products.html",
@@ -45,15 +57,18 @@ def add_product(
         name="product_form.html"
     )
 
-@app.get("/insert_product")
+@app.post("/insert_product")
 def insert_product(
-    name: str | None = None,
-    price: float | None = None,
-    location: str | None = None,
+    product: Annotated[Product, Form()]
 ):
-    product={"name":name,"price":price,"location":location}
-    product_list.append(product)
+    product_list.append(product.model_dump())
     return "Product Added Successfully"
+
+@app.post("/insert_product_json")
+def insert_product_json(
+    product: Product
+):
+    print(product)
 
 
 

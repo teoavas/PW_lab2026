@@ -8,18 +8,14 @@
     <tr>
         <th>Nome</th>
         <th>Prezzo</th>
-        <th>Immagine</th>
+        <th>Location</th>
     </tr>
 
     {% for product in products %}
     <tr>
         <td>{{ product.name }}</td>
         <td>{{ product.price }} €</td>
-        <td>
-            <img src="{{ url_for('static', path=product.image) }}" 
-                 alt="{{ product.name }}" 
-                 width="120">
-        </td>
+        <td>{{ product.location }}</td>
     </tr>
     {% endfor %}
 </table>
