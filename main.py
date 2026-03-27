@@ -11,6 +11,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 templates = Jinja2Templates(directory="templates")
 
+product_list = []
 
 @app.get("/", response_class=HTMLResponse)
 def home(request: Request):
@@ -34,6 +35,27 @@ def products(request: Request):
         request=request,
         context={"products": products}
     )
+
+@app.get("/product_form", response_class=HTMLResponse)
+def add_product(
+    request: Request,
+):
+    return templates.TemplateResponse(
+        request=request,
+        name="product_form.html"
+    )
+
+@app.get("/insert_product")
+def insert_product(
+    name: str | None = None,
+    price: float | None = None,
+    location: str | None = None,
+):
+    product={"name":name,"price":price,"location":location}
+    product_list.append(product)
+    return "Product Added Successfully"
+
+
 
 
 '''@app.get("/{username}")
